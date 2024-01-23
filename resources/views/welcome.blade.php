@@ -28,6 +28,22 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+  alpha/css/bootstrap.css" rel="stylesheet">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
  
 </head>
 
@@ -123,36 +139,67 @@
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Silk Container Lines Ltd</span></h2>
           <p class="animate__animated animate__fadeInUp">Welcome to Silk Container Ltd, your trusted partner in the world of freight forwarding and logistics. With a steadfast commitment to simplifying the complexities of global shipping, we have established ourselves as leaders in the industry. The organizational goal of Cosmos Logistics Ltd is to be regarded as the premier freight forwarding company in Bangladesh providing customers</p>
-          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Get Instant
+          <a href="{{ route('instant') }}" class="btn-get-started animate__animated animate__fadeInUp">Get Instant
             Quote</a>
         </div>
       </div>
 
-      <!-- Slide 2 -->
-      {{-- <div class="carousel-item">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Mission</h2>
-          <p class="animate__animated animate__fadeInUp">Our mission is to empower your business by providing efficient, reliable, and cost-effective freight forwarding solutions. We understand that the smooth flow of goods is the lifeblood of international trade, and we are here to ensure your cargo reaches its destination seamlessly</p>
-          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
-        </div>
-      </div> --}}
+    {{-- modal --}}
 
-      <!-- Slide 3 -->
-      {{-- <div class="carousel-item">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Approach</h2>
-          <p class="animate__animated animate__fadeInUp">To be a reputed and preferred name in the freight forwarding business by providing global logistics service having our own people, offices and infrastructure.</p>
-          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
-        </div>
-      </div> --}}
-
-      {{-- <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-      </a> --}}
-
-      {{-- <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-      </a> --}}
+    {{-- <button type="button" class="btn btn-primary" >
+      Launch static backdrop modal
+    </button> --}}
+    
+    <!-- Modal -->
+    {{-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Get Instant Quote Form</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form class="row g-3" action="{{ url('/submit-form') }}" method="POST" id="myForm">
+                      @csrf
+                      <div class="col-md-6">
+                          <label for="inputName" class="form-label">Name</label>
+                          <input type="text" class="form-control" name="name" required>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="inputEmail" class="form-label">Email</label>
+                          <input type="email" class="form-control" name="email" required>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="inputOrigin" class="form-label">Port of origin</label>
+                          <input type="text" class="form-control" name="port_of_origin" required>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="inputDestination" class="form-label">Port of destination</label>
+                          <input type="text" class="form-control" name="port_of_destination" required>
+                      </div>
+                      <div class="col-md-12">
+                          <label class="form-label">Cargo Weight</label>
+                          <input type="text" class="form-control" name="cargo_weight" required>
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label">Commodity and Container Details</label>
+                          <textarea name="commodity_details" class="form-control" required></textarea>
+                      </div>
+                      <div class="col-12">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div> --}}
+      
+  @if ($message = Session::get('error'))
+  <div class="alert alert-danger">
+  <p>{{ $message }}</p>
+  </div>
+  @endif
 
     </div>
   </section><!-- End Hero -->
@@ -299,7 +346,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Client</h2>
+          {{-- <h2>Client</h2> --}}
           {{-- <p>These features collectively contribute to a comprehensive and user-friendly freight forwarding </p> --}}
         </div>
 
@@ -407,6 +454,21 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  
+  <script>
+    @if(Session::has('message'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+        toastr.success("{{ session('message') }}");
+    @endif
+  
+   
+  </script>
+
 </body>
 
 </html>
+

@@ -7,9 +7,15 @@
     <title>Contact Form Submission</title>
 </head>
 <body>
-    <p>Name: {{ $name }}</p>
-    <p>Email: {{ $email }}</p>
-    <p>Subject: {{($subject) }}</p>
-    {{-- <p>Message:  {!! Illuminate\Support\Str::htmlentities($message->getBody()) !!}</p> --}}
+     {{-- <p>Name: {{ is_string($name) ? $name : '' }}</p>
+
+    <p>Email: {{ is_string($email) ? $email : '' }}</p>
+
+    <p>Subject: {{ is_string($subject) ? $subject : '' }}</p> --}}
+
+    {{-- <p>Message: {{ is_string($message) ? $message : '' }}</p> --}}
+    <p>Name: {{$name}}</p>
+  <p>Email: {{$email}}</p>
+  <p>Message: {{$body}}</p>
 </body>
 </html>

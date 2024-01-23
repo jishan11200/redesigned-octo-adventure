@@ -135,6 +135,20 @@
                         </ul>
                         <!-- .nk-menu-sub -->
                     </li>
+
+
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-tranx"></em></span>
+                            <span class="nk-menu-text"> Get Instant Quote</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{route('admin.instant.index')}}" class="nk-menu-link"><span class="nk-menu-text">All Instent Quote</span></a>
+                            </li>
+                        </ul>
+                        <!-- .nk-menu-sub -->
+                    </li>
                     <!-- .nk-menu-item -->
                 </ul>
                 <!-- .nk-menu -->

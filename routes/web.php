@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NewsroomController;
+use App\Http\Controllers\SubmitFromController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,7 +127,8 @@ Route::get('/e-services', function () {
 Route::get('/newsroom', [App\Http\Controllers\HomeController::class, 'newsroom'])->name('newsroom');
 
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'main'])->name('contact');
-
+Route::get('/instant-qoute', [App\Http\Controllers\SubmitFromController::class, 'main'])->name('instant');
+Route::post('/submit-form', [App\Http\Controllers\SubmitFromController::class, 'submitForm'])->name('submit.form');
 
 Route::post('/contactForm', [App\Http\Controllers\ContactController::class, 'contactForm'])->name('contactForm');
 // Users Routes
@@ -160,6 +162,10 @@ Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
      Route::get('admin/newsroom/edit/{id}',[NewsroomController::class,'edit'])->name('newsroom.edit');
      Route::post('admin/newsroom/update/{id}',[NewsroomController::class,'update'])->name('newsroom.update');
      Route::delete('admin/newsroom/destroy/{id}',[NewsroomController::class,'destroy'])->name('newsroom.destroy');
+
+      //Get Instant Quote route
+    Route::get('/admin/instant',[SubmitFromController::class,'index'])->name('admin.instant.index');
+    Route::delete('/admin/instant/destroy/{id}',[SubmitFromController::class,'destroy'])->name('admin.instant.destroy');
 });
 
 

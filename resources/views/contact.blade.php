@@ -203,11 +203,11 @@
           <div class="col-lg-6">
 
 
-            {{-- @if ($message = Session::get('success'))
-            <div class="alert alert-success">
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
             <p>{{ $message }}</p>
             </div>
-            @endif --}}
+            @endif
             <form action="{{ route('contactForm') }}" method="POST">
               @csrf
               <div class="row">
@@ -224,11 +224,7 @@
               <div class="form-group mt-3">
                 <textarea class="form-control" name="message" rows="10" placeholder="Message" required></textarea>
               </div>
-              {{-- <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div> --}}
+              
               <br><br>
               <div class="text-center "><button type="submit" class="btn btn-info">Send Message</button></div>
             </form>
@@ -343,6 +339,19 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script>
+    @if(Session::has('message'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+        toastr.success("{{ session('message') }}");
+    @endif
+  
+   
+  </script>
+
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -364,40 +373,3 @@
 </body>
 
 </html>
-<script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-      toastr.success("{{ session('message') }}");
-  @endif
-
-  @if(Session::has('error'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-      toastr.error("{{ session('error') }}");
-  @endif
-
-  @if(Session::has('info'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-      toastr.info("{{ session('info') }}");
-  @endif
-
-  @if(Session::has('warning'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-      toastr.warning("{{ session('warning') }}");
-  @endif
-</script>

@@ -38,8 +38,9 @@ class ContactFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->email, $this->name),
+            from: new Address($this->email, $this->name, $this->message),
             subject: $this->subject,
+            // message: $this->message,
         );
     }
 
@@ -52,12 +53,13 @@ class ContactFormMail extends Mailable
     {
         return new Content(
             view: 'emails.contact_form',
-            with: ([
-                'name' => $this->name,
-                'email' => $this->email,
-                'subject' => $this->subject,
-                'message' => $this->message,
-            ])
+           
+            // with: ([
+            //     'name' => $this->name,
+            //     'email' => $this->email,
+            //     'subject' => $this->subject,
+            //     'message' => $this->message,
+            // ])
             
         );
     }
